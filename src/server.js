@@ -39,6 +39,15 @@ app.get("/private", basicAuthMiddleware, (req, res) => {
   res.json({ message: "You are authenticated and can access this private endpoint." });
 });
 
+app.get("/auth-check", basicAuthMiddleware, (req, res) => {
+  const authHeader = req.headers.authorization;
+  const base64Credentials = authHeader.split(" ")[1];
+  const decodedCredentials = Buffer.from(base64Credentials, "base64").toString("utf-8");
+  const [username] = decodedCredentials.split(":");
+
+  res.json({ authenticated: true, user: username });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

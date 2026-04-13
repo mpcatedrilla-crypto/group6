@@ -16,6 +16,7 @@ Server starts on `http://localhost:3000`.
 - `GET /` public status message
 - `GET /public` public endpoint
 - `GET /private` protected endpoint
+- `GET /auth-check` protected endpoint returning authenticated username
 
 ## Default Credentials
 
@@ -26,3 +27,12 @@ You can override with environment variables:
 
 - `BASIC_AUTH_USER`
 - `BASIC_AUTH_PASS`
+
+## Team Members
+
+- `Jwelynie123` - `dgperez@ccc.edu.ph`
+- `tzahhhahaha` - `jaamado@ccc.edu.ph`
+- `yumaki00` - `abbayanban@ccc.edu.ph`
+- `markmasongsong` - `mcmasongsong@ccc.edu.ph`
+- `mpcatedrilla` - `mpcatedrilla@ccc.edu.ph`
+- `rayvenedburato` - `reburato@ccc.edu.ph`
