@@ -100,7 +100,12 @@ try {
         }
         if (count($segments) === 3 && ctype_digit($segments[1]) && $segments[2] === 'participants' && $method === 'GET') {
             $eventId = (int) $segments[1];
-            jsonResponse(200, $eventModel->participantsByEvent($eventId));
+            $participants = $eventModel->participantsByEvent($eventId);
+            jsonResponse(200, [
+                'event_id' => $eventId,
+                'participants_count' => count($participants),
+                'participants' => $participants,
+            ]);
         }
     }
 
@@ -141,7 +146,12 @@ try {
         }
         if (count($segments) === 3 && ctype_digit($segments[1]) && $segments[2] === 'events' && $method === 'GET') {
             $participantId = (int) $segments[1];
-            jsonResponse(200, $participantModel->eventsByParticipant($participantId));
+            $events = $participantModel->eventsByParticipant($participantId);
+            jsonResponse(200, [
+                'participant_id' => $participantId,
+                'events_count' => count($events),
+                'events' => $events,
+            ]);
         }
     }
 
