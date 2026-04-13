@@ -1,38 +1,113 @@
-# Basic Authentication API
+# Group 6 - Event Management System
 
-Simple Node.js and Express API using HTTP Basic Authentication.
+RESTful API project for managing events, participants, and registrations using PHP (OOP) and PostgreSQL.
 
-## Run
+## Tech Stack
 
-```bash
-npm install
-npm start
+- PHP (XAMPP Apache)
+- PostgreSQL
+- Postman (API testing)
+
+## Database Setup
+
+1. Create a PostgreSQL database named `event_management_db`.
+2. Run `database.sql` in pgAdmin (Query Tool) or in `psql`.
+3. Make sure PostgreSQL is running before starting API requests.
+
+## XAMPP Setup
+
+1. Put this folder inside `xampp/htdocs/` or create an Apache alias to this project.
+2. Start **Apache** in XAMPP.
+3. Update DB credentials in `config/database.php` if needed:
+   - host
+   - port
+   - dbName
+   - username
+   - password
+
+Base URL example:
+
+`http://localhost/BasicAuthentication/api`
+
+## API Endpoints
+
+### Events (CRUD)
+
+- `GET /api/events`
+- `GET /api/events/{id}`
+- `POST /api/events`
+- `PUT /api/events/{id}`
+- `DELETE /api/events/{id}`
+
+Sample body (`POST`/`PUT`):
+
+```json
+{
+  "title": "Hackathon 2026",
+  "description": "24-hour coding event",
+  "venue": "CCC Lab 2",
+  "event_date": "2026-07-10"
+}
 ```
 
-Server starts on `http://localhost:3000`.
+### Participants (CRUD)
 
-## Endpoints
+- `GET /api/participants`
+- `GET /api/participants/{id}`
+- `POST /api/participants`
+- `PUT /api/participants/{id}`
+- `DELETE /api/participants/{id}`
 
-- `GET /` public status message
-- `GET /public` public endpoint
-- `GET /private` protected endpoint
-- `GET /auth-check` protected endpoint returning authenticated username
+Sample body (`POST`/`PUT`):
 
-## Default Credentials
+```json
+{
+  "full_name": "Juan Dela Cruz",
+  "email": "juan@example.com",
+  "phone": "09170001111"
+}
+```
 
-- Username: `admin`
-- Password: `password123`
+### Registrations
 
-You can override with environment variables:
+- `GET /api/registrations`
+- `POST /api/registrations`
+- `DELETE /api/registrations/{id}`
 
-- `BASIC_AUTH_USER`
-- `BASIC_AUTH_PASS`
+Sample body (`POST`):
 
-## Team Members
+```json
+{
+  "event_id": 1,
+  "participant_id": 2
+}
+```
 
-- `Jwelynie123` - `dgperez@ccc.edu.ph`
-- `tzahhhahaha` - `jaamado@ccc.edu.ph`
-- `yumaki00` - `abbayanban@ccc.edu.ph`
-- `markmasongsong` - `mcmasongsong@ccc.edu.ph`
-- `mpcatedrilla` - `mpcatedrilla@ccc.edu.ph`
-- `rayvenedburato` - `reburato@ccc.edu.ph`
+### Relationship Queries
+
+- `GET /api/events/{id}/participants`
+- `GET /api/participants/{id}/events`
+
+### Analytics Queries
+
+- `GET /api/analytics/participants-per-event`
+- `GET /api/analytics/most-popular-event`
+- `GET /api/analytics/total-registrations`
+
+## Postman Testing Notes
+
+1. Set header `Content-Type: application/json` for `POST`/`PUT`.
+2. Use sample JSON bodies from this README.
+3. Verify:
+   - CRUD returns proper status codes (`200`, `201`, `404`, `422`)
+   - Relationship endpoints return joined records
+   - Analytics endpoints return aggregate results
+
+## Member Roles and Responsibilities
+
+- Database Designer: `Jwelynie123` (`dgperez@ccc.edu.ph`)
+- Model Developer (PHP OOP): `tzahhhahaha` (`jaamado@ccc.edu.ph`)
+- CRUD API Developer: `yumaki00` (`abbayanban@ccc.edu.ph`)
+- Relationship API Developer: `mpcatedrilla` (`mpcatedrilla@ccc.edu.ph`)
+- Data Analytics API Developer: `markmasongsong` (`mcmasongsong@ccc.edu.ph`)
+- Documentation and Testing: `rayvenedburato` (`reburato@ccc.edu.ph`)
