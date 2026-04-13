@@ -176,11 +176,18 @@ try {
 
     if ($segments[0] === 'analytics') {
         if (count($segments) === 2 && $segments[1] === 'participants-per-event' && $method === 'GET') {
-            jsonResponse(200, $registrationModel->participantsPerEvent());
+            $rows = $registrationModel->participantsPerEvent();
+            jsonResponse(200, [
+                'total_events' => count($rows),
+                'data' => $rows,
+            ]);
         }
         if (count($segments) === 2 && $segments[1] === 'most-popular-event' && $method === 'GET') {
             $event = $registrationModel->mostPopularEvent();
-            jsonResponse(200, $event ? $event : ['message' => 'No events found.']);
+            jsonResponse(200, [
+                'data' => $event,
+                'message' => $event ? 'Most popular event retrieved.' : 'No events found.',
+            ]);
         }
         if (count($segments) === 2 && $segments[1] === 'total-registrations' && $method === 'GET') {
             jsonResponse(200, ['total_registrations' => $registrationModel->totalRegistrations()]);
