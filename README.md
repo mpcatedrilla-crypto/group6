@@ -16,6 +16,7 @@ Server starts on `http://localhost:3000`.
 - `GET /` public status message
 - `GET /public` public endpoint
 - `GET /private` protected endpoint
+- `GET /auth-check` protected endpoint returning authenticated username
 
 ## Default Credentials
 
